@@ -4,6 +4,6 @@ export function isDate(val: any): boolean {
   return toString.call(val) === '[object Date]'
 }
 
-export function isObject(val: any): boolean {
+export function isObject(val: any): val is Object {
   return val !== null && typeof val === 'object'
 }
