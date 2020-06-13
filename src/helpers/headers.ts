@@ -1,5 +1,4 @@
 import { isPlainObject } from './util'
-import { head } from 'shelljs'
 
 function normalizeHeaderName(headers: any, normalizeName: string): void {
   if (!headers) {
