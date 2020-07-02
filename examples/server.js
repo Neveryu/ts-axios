@@ -1,9 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('./webpack.config')
+
+require('./server2')
 
 const app = express()
 const compiler = webpack(webpackConfig)
@@ -21,8 +24,8 @@ app.use(webpackHotMiddleware(compiler))
 app.use(express.static(__dirname))
 
 app.use(bodyParser.json())
-
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 const router = express.Router()
 
@@ -89,10 +92,30 @@ router.post('/extend/post', function(req, res) {
   res.json(req.body)
 })
 
-
 router.get('/interceptor/get', function(req, res) {
   res.end('hello')
 })
+
+router.post('/config/post', function(req, res) {
+  res.json(req.body)
+})
+
+router.get('/cancel/get', function(req, res) {
+  setTimeout(() => {
+    res.json('hello')
+  }, 1000)
+})
+
+router.post('/cancel/post', function(req, res) {
+  setTimeout(() => {
+    res.json(req.body)
+  }, 1000)
+})
+
+router.get('/more/get', function(req, res) {
+  res.json(req.cookies)
+})
+
 app.use(router)
 
 const port = process.env.PORT || 8080
