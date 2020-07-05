@@ -21,7 +21,11 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler))
 
-app.use(express.static(__dirname))
+app.use(express.static(__dirname, {
+  setHeaders(res) {
+    res.cookie('XSRF-TOKEN-D', '1234abc')
+  }
+}))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -114,6 +118,11 @@ router.post('/cancel/post', function(req, res) {
 
 router.get('/more/get', function(req, res) {
   res.json(req.cookies)
+})
+
+router.get('/more/304', function(req, res) {
+  res.status(304)
+  res.end()
 })
 
 app.use(router)

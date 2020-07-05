@@ -5,5 +5,4 @@ const cookie = {
   }
 }
 
-// 11.1-11.3 18:41
 export default cookie
