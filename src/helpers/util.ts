@@ -47,5 +47,5 @@ export function deepMerge(...objs: any[]): any {
 }
 
 export function isURLSearchParams(val: any): val is URLSearchParams {
-  return typeof val !== undefined && val instanceof URLSearchParams
+  return typeof(val) !== 'undefined' && val instanceof URLSearchParams
 }

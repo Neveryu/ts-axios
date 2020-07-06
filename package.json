@@ -1,18 +1,18 @@
 {
-  "name": "ts-axios",
+  "name": "yu-axios",
   "version": "0.0.0",
   "description": "",
   "keywords": [],
-  "main": "dist/ts-axios.umd.js",
-  "module": "dist/ts-axios.es5.js",
-  "typings": "dist/types/ts-axios.d.ts",
+  "main": "dist/yu-axios.umd.js",
+  "module": "dist/yu-axios.es5.js",
+  "typings": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
-  "author": " <never_yu@foxmail.com>",
+  "author": "NeverYu <never_yu@qq.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Neveryu/ts-axios"
   },
   "license": "MIT",
   "engines": {
@@ -33,7 +33,9 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-    "travis-deploy-once": "travis-deploy-once"
+    "travis-deploy-once": "travis-deploy-once",
+    "prepub": "npm run test:prod && npm run build",
+    "pub": "sh release.sh"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
@@ -70,7 +72,7 @@
       }
     },
     "collectCoverageFrom": [
-      "src/*.{js,ts}"
+      "src/helpers/*.{js,ts}"
     ]
   },
   "prettier": {
